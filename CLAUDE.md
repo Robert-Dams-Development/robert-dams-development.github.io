@@ -20,7 +20,7 @@ No build tools or package managers. Preview locally by opening `index.html` in a
 
 ### Single-page landing (root)
 
-- **[index.html](index.html)** — Single-page site. Section order: hero → about → services (bg-alt) → results → how-i-work → experience (bg-alt) → background (bg-alt, credentials) → skills → contact (bg-alt) → footer
+- **[index.html](index.html)** — Single-page site. Section order: hero → about → services (bg-alt) → results → how-i-work → experience (bg-alt, headed "Bewezen track record") → skills (headed "Tools waarmee we bouwen") → contact (bg-alt) → footer. Section element classes (`.experience`, `.skills`) and IDs are unchanged from the personal-brand version — only the visible headings shifted to business-facing language during the rebrand. A commented-out `<section class="case-studies bg-alt" id="case-studies">` scaffold sits between Results and How-I-Work, ready to switch on when the first case (HubSpot + Business Central → Excel) ships.
 - **[assets/style.css](assets/style.css)** — All styling; CSS custom properties for theming (`--bg`, `--text`, `--accent`, etc.); dark navy default (`#0d1520`), light mode (`#f7f8fa`) via `[data-theme="light"]`; blue accent `#4f8ef7`
 - **[assets/script.js](assets/script.js)** — Language toggle (NL/EN), theme toggle (light/dark, persisted to localStorage), scroll-reveal IntersectionObserver, bar chart animation observer, and contact form (Formspree via fetch)
 - **[assets/photo.jpg](assets/photo.jpg)** — Profile photo
@@ -100,8 +100,20 @@ The site targets **MKB (SME) clients in the Brainport region** looking for AI au
 - Statistics must cite a named source (McKinsey, Forrester, etc.) — no fabricated client results
 - Inline CTAs at the bottom of services and experience sections (`.section-cta` class) — standalone CTA strips between sections were rejected as feeling out of place
 
+## SEO surface
+
+Each page (`index.html` + the four experience pages) carries a full meta block: `<title>`, `<meta name="description">`, `<link rel="canonical">`, `<meta name="theme-color">`, robots, author, full Open Graph set (og:type, og:site_name, og:title, og:description, og:url, og:image, og:image:width/height/alt, og:locale), Twitter Card (summary_large_image), and JSON-LD structured data. Landing uses `Organization` schema; each experience page uses `BreadcrumbList` (Home → Track record → company name).
+
+`robots.txt` and `sitemap.xml` live at the repo root and reference the production domain `https://damsdevelopment.nl/`. Update sitemap `<lastmod>` dates whenever a page's content changes meaningfully.
+
+**OG image:** [og-image-template.html](og-image-template.html) at the repo root is a 1200×630 HTML template you screenshot to `assets/og-image.png` (workflow documented in the file's HTML comment — Chrome DevTools "Capture full size screenshot", or `npx puppeteer-screenshot`). The template is not deployed; only the resulting PNG is. Regenerate when the wordmark, hero tagline, or studio label changes. Until `assets/og-image.png` exists, social previews on LinkedIn/Slack/WhatsApp will fall back to no image — everything else still works.
+
+**Why no `hreflang`:** the site is bilingual (NL/EN) but both versions live at the same URL with a JS toggle. `hreflang` requires distinct URLs per language and would be misapplied here.
+
 ## Pending / Nice-to-have
 
+- **Generate `assets/og-image.png`** from `og-image-template.html` (one-time, then social previews work everywhere)
+- Footer redesign with KvK + BTW number + small wordmark visual
 - Consider adding stock imagery to service cards as CSS `background-image` with dark overlay
 - Scroll-spy on nav (highlight active section as user scrolls) — not yet implemented
 - Testimonials section — space reserved for future social proof

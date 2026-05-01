@@ -205,6 +205,53 @@ section h2::after {
     color: var(--accent);
 }
 
+/* Wordmark — chevron mark + "Dams Development" text.
+   Reusable: applied to nav and footer brand. */
+.wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+}
+
+.wordmark-mark {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Two angled bars forming a '>>' chevron — evokes flow / throughput / automation */
+.wordmark-mark::before,
+.wordmark-mark::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    width: 0.18em;
+    background: var(--accent);
+    border-radius: 0.04em;
+}
+.wordmark-mark::before {
+    left: 22%;
+    transform: skewX(20deg);
+}
+.wordmark-mark::after {
+    left: 50%;
+    transform: skewX(20deg);
+    opacity: 0.55;
+}
+
+.wordmark-name {
+    font-weight: 500;
+}
+.wordmark-name strong {
+    font-weight: 700;
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -333,17 +380,20 @@ section h2::after {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-photo {
-    display: block;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 1.5rem;
-    border: 3px solid var(--accent);
+.hero-brand {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
 }
 
-/* photoGlow removed; single pulsing element (avail-dot) is enough */
+.wordmark--display {
+    font-size: 2.25rem;
+    letter-spacing: -0.025em;
+}
+
+.wordmark--display .wordmark-name {
+    font-weight: 600;
+}
 
 .availability-badge {
     display: inline-flex;
@@ -425,6 +475,41 @@ section h2::after {
     margin-top: 0.5rem;
     font-size: 0.9rem;
     color: var(--text-dim);
+}
+
+.about-founder {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    max-width: 700px;
+}
+
+.about-subheading {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.about-founder-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.about-founder-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+}
+
+.about-founder-body p {
+    margin-bottom: 0;
 }
 
 /* ============================================
@@ -625,6 +710,115 @@ section h2::after {
 
 
 /* ============================================
+   10d. CASE STUDIES (scaffold — section currently
+   commented out in index.html; uncomment when the
+   first case study is ready to publish)
+   ============================================ */
+.case-studies-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.case-card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 1.75rem 1.75rem;
+    background-color: var(--bg-card);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.case-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.1);
+}
+
+.case-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.case-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    background: rgba(var(--accent-rgb), 0.12);
+    color: var(--accent);
+}
+
+.case-status--inprogress {
+    background: rgba(var(--green-rgb), 0.12);
+    color: var(--green);
+}
+
+.case-sector {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.case-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.case-summary {
+    color: var(--text-sub);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.case-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.case-stack span {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--bg-skill);
+    color: var(--text-skill);
+    border-radius: 3px;
+}
+
+.case-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.case-result-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.case-result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.1;
+}
+
+.case-result-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+
+/* ============================================
    11. HOW I WORK
    ============================================ */
 .process-steps {
@@ -747,81 +941,6 @@ section h2::after {
 }
 
 /* ============================================
-   13. CREDENTIALS
-   ============================================ */
-.credentials-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.cred-card {
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--accent);
-    border-radius: 6px;
-    padding: 1.75rem 1.5rem;
-    background-color: var(--bg-card);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.cred-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.1);
-}
-
-.cred-type {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: rgba(var(--accent-rgb), 0.12);
-    border: 1px solid rgba(var(--accent-rgb), 0.3);
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.03em;
-    margin-bottom: 0.75rem;
-}
-
-.cred-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-}
-
-.cred-institution {
-    color: var(--accent);
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.cred-detail {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-}
-
-.credentials-grid--2col {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.cred-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.75rem;
-}
-
-.cred-chips span {
-    padding: 0.2rem 0.65rem;
-    background-color: rgba(var(--accent-rgb), 0.08);
-    border: 1px solid rgba(var(--accent-rgb), 0.2);
-    border-radius: 100px;
-    font-size: 0.78rem;
-    color: var(--accent);
-}
-
-/* ============================================
    14. CONTACT
    ============================================ */
 .contact-subtext {
@@ -913,14 +1032,12 @@ section h2::after {
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
     .service-card,
-    .exp-card,
-    .cred-card {
+    .exp-card {
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .service-card:hover,
-    .exp-card:hover,
-    .cred-card:hover {
+    .exp-card:hover {
         transform: none;
     }
 }
@@ -938,6 +1055,8 @@ section h2::after {
     h1 { font-size: 2rem; }
     h2 { font-size: 1.4rem; }
 
+    .wordmark--display { font-size: 1.5rem; }
+
     section {
         padding: 3rem 1.25rem;
     }
@@ -946,9 +1065,13 @@ section h2::after {
         padding: 3rem 1.25rem;
     }
 
-    .services-grid,
-    .credentials-grid {
+    .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    .about-founder-body {
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .process-steps {

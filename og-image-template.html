@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Dams Development — OG image template (1200×630)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    background: #0d1520;
+    color: #f0f0f0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .og-card {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    padding: 90px 100px;
+    background: #0d1520;
+    background-image: radial-gradient(circle, rgba(79, 142, 247, 0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    overflow: hidden;
+  }
+
+  .og-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(79, 142, 247, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .og-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .og-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 76px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  .og-mark {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .og-mark::before, .og-mark::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    width: 0.18em;
+    background: #4f8ef7;
+    border-radius: 0.04em;
+  }
+  .og-mark::before { left: 22%; transform: skewX(20deg); }
+  .og-mark::after  { left: 50%; transform: skewX(20deg); opacity: 0.55; }
+
+  .og-name strong { font-weight: 800; }
+
+  .og-tagline {
+    font-size: 60px;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    max-width: 900px;
+  }
+  .og-tagline .light { font-weight: 400; color: #c8d0e0; }
+
+  .og-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 26px;
+    background: rgba(79, 142, 247, 0.12);
+    border: 1px solid rgba(79, 142, 247, 0.35);
+    border-radius: 100px;
+    font-size: 22px;
+    color: #4f8ef7;
+    letter-spacing: 0.04em;
+    align-self: flex-start;
+  }
+</style>
+</head>
+<body>
+<!--
+  OG IMAGE TEMPLATE — generates assets/og-image.png at 1200×630.
+
+  Why this file exists: HTML renders typography more reliably than SVG-to-PNG
+  conversion. Open this in a browser, capture a full-size screenshot, save
+  the PNG into assets/og-image.png. Meta tags in index.html and the
+  experience pages reference that PNG path.
+
+  WORKFLOW (Chrome / Edge):
+    1. Open this file in the browser (drag & drop, or file://...).
+    2. DevTools (F12 or Cmd/Ctrl+Shift+I).
+    3. Command Menu (Cmd/Ctrl+Shift+P).
+    4. Type "Capture full size screenshot" → Enter.
+    5. Save the resulting PNG as assets/og-image.png.
+
+  ALTERNATIVE (CLI, headless Chrome via Puppeteer):
+    npx puppeteer-screenshot og-image-template.html --width 1200 --height 630 --out assets/og-image.png
+
+  When to regenerate: anytime the wordmark, tagline, or studio label changes.
+  This template is not deployed — it sits at the repo root for tooling only.
+-->
+
+<div class="og-card">
+  <div class="og-content">
+    <span class="og-wordmark">
+      <span class="og-mark"></span>
+      <span class="og-name"><strong>Dams</strong> Development</span>
+    </span>
+
+    <p class="og-tagline">
+      Werkende automatisering.<br>
+      <span class="light">In weken, niet maanden.</span>
+    </p>
+
+    <span class="og-pill">Automatiseringsstudio · Brainport-regio</span>
+  </div>
+</div>
+</body>
+</html>
