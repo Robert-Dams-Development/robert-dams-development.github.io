@@ -22,9 +22,9 @@
     --green:          #4ade80;
     --green-rgb:      74, 222, 128;
     --green-dark-rgb: 34, 197, 94;
-    --cta:            #22c55e;
-    --cta-hover:      #16a34a;
-    --cta-text:       #fff;
+    --cta:            #4f8ef7;
+    --cta-hover:      #3a7ce8;
+    --cta-text:       #1a1a2e;
     --bg-card-hover:  #1b2640;
 }
 
@@ -49,9 +49,9 @@
     --green:          #15803d;
     --green-rgb:      21, 128, 61;
     --green-dark-rgb: 21, 128, 61;
-    --cta:            #16a34a;
-    --cta-hover:      #15803d;
-    --cta-text:       #fff;
+    --cta:            #4f8ef7;
+    --cta-hover:      #3a7ce8;
+    --cta-text:       #1a1a2e;
     --bg-card-hover:  #f0f5ff;
 }
 
@@ -87,7 +87,7 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
-h1 { font-size: 2.5rem; }
+h1 { font-size: 3.5rem; letter-spacing: -0.03em; }
 h2 { font-size: 1.8rem; }
 h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
 
@@ -453,7 +453,7 @@ section h2::after {
     border-radius: 6px;
     text-decoration: none;
     transition: background-color 0.2s;
-    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.25);
+    box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.25);
 }
 
 .cta-button:hover {
@@ -948,6 +948,30 @@ section h2::after {
     margin-bottom: 1rem;
 }
 
+.contact-trust {
+    list-style: none;
+    margin: 0.5rem 0 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 500px;
+}
+
+.contact-trust li {
+    color: var(--text-sub);
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.contact-trust li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
 .pricing-hint {
     font-size: 0.9rem;
     color: var(--text-dim);
@@ -988,15 +1012,16 @@ section h2::after {
 
 #contactForm button[type="submit"] {
     margin-top: 1rem;
-    padding: 0.75rem;
+    padding: 0.85rem 2.2rem;
     background-color: var(--cta);
     color: var(--cta-text);
     font-weight: 700;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
     transition: background-color 0.2s;
+    width: 100%;
 }
 
 #contactForm button[type="submit"]:hover {
@@ -1052,7 +1077,7 @@ section h2::after {
 }
 
 @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
+    h1 { font-size: 2.25rem; }
     h2 { font-size: 1.4rem; }
 
     .wordmark--display { font-size: 1.5rem; }
