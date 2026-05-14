@@ -205,6 +205,12 @@ section h2::after {
     color: var(--accent);
 }
 
+/* Optical-center fix — caps-text visual center sits below geometric center,
+   so nudge the chevron mark down to match (mirrors the hero treatment). */
+.nav-logo .wordmark-mark {
+    transform: translateY(8%);
+}
+
 /* Wordmark — chevron mark + "Dams Development" text.
    Reusable: applied to nav and footer brand. */
 .wordmark {
@@ -345,7 +351,11 @@ section h2::after {
     position: relative;
     max-width: 100%;
     margin: 0;
-    padding: 10rem 1.5rem 6rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem;
     text-align: center;
     background-color: var(--bg);
     background-image: radial-gradient(circle, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
@@ -369,7 +379,7 @@ section h2::after {
 .hero-content {
     position: relative;
     z-index: 1;
-    max-width: 700px;
+    max-width: 820px;
     margin: 0 auto;
     text-align: center;
     animation: heroFadeIn 0.7s ease forwards;
@@ -381,14 +391,30 @@ section h2::after {
 }
 
 .hero-brand {
-    display: flex;
-    justify-content: center;
+    text-align: center;
     margin-bottom: 1.5rem;
 }
 
+/* Wordmark in the hero — bigger, never wraps. The chevron is positioned absolutely
+   to the left of the text so it does NOT push the text off-center; the text itself
+   is what gets centered in the viewport. */
 .wordmark--display {
-    font-size: 2.25rem;
-    letter-spacing: -0.025em;
+    display: inline-block;
+    position: relative;
+    font-size: 4rem;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.wordmark--display .wordmark-mark {
+    position: absolute;
+    right: 100%;
+    margin-right: 0.4em;
+    top: 50%;
+    transform: translateY(-42%);
+    width: 1em;
+    height: 1em;
 }
 
 .wordmark--display .wordmark-name {
@@ -443,8 +469,25 @@ section h2::after {
     margin: 0.75rem auto 2rem;
 }
 
+.hero h1 {
+    font-size: 1.75rem;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.hero-cta-row {
+    display: flex;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .cta-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.85rem 2.2rem;
     background-color: var(--cta);
     color: var(--cta-text);
@@ -452,14 +495,39 @@ section h2::after {
     font-size: 1.05rem;
     border-radius: 6px;
     text-decoration: none;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.25);
+    line-height: 1;
 }
 
 .cta-button:hover {
     background-color: var(--cta-hover);
     text-decoration: none;
 }
+
+.cta-button--secondary {
+    background-color: transparent;
+    color: var(--text);
+    border: 1.5px solid rgba(var(--accent-rgb), 0.45);
+    box-shadow: none;
+}
+
+.cta-button--secondary:hover {
+    background-color: rgba(var(--accent-rgb), 0.08);
+    border-color: var(--accent);
+}
+
+/* Arrows are pseudo-elements so the data-nl/data-en text-content
+   swap (which only replaces the text node) doesn't wipe them out. */
+.cta-button--primary::after,
+.cta-button--secondary::after {
+    display: inline-block;
+    transition: transform 0.2s;
+}
+.cta-button--primary::after { content: '\2192'; }
+.cta-button--secondary::after { content: '\2193'; }
+.cta-button--primary:hover::after { transform: translateX(3px); }
+.cta-button--secondary:hover::after { transform: translateY(2px); }
 
 /* ============================================
    8. ABOUT
@@ -500,9 +568,9 @@ section h2::after {
 }
 
 .about-founder-photo {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
+    width: 140px;
+    height: 180px;
+    border-radius: 14px;
     object-fit: cover;
     border: 2px solid var(--accent);
     flex-shrink: 0;
@@ -510,6 +578,39 @@ section h2::after {
 
 .about-founder-body p {
     margin-bottom: 0;
+}
+
+/* Employer trust strip — preserves the "shipped at serious companies" signal
+   without putting employer history in competition with client work. */
+.about-employers {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    flex-wrap: wrap;
+}
+
+.about-employers-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    font-weight: 700;
+}
+
+.about-employers-list {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-sub);
+    letter-spacing: 0.01em;
+}
+
+.about-employers-list .sep {
+    margin: 0 0.55rem;
+    opacity: 0.5;
+    color: var(--text-dim);
 }
 
 /* ============================================
@@ -941,6 +1042,126 @@ section h2::after {
 }
 
 /* ============================================
+   13. PROJECTS / RECENT WORK
+   ============================================ */
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    border-color: rgba(var(--accent-rgb), 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(var(--accent-rgb), 0.08);
+}
+
+.project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    background-color: rgba(var(--green-dark-rgb), 0.12);
+    border: 1px solid rgba(var(--green-dark-rgb), 0.3);
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.project-context {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+}
+
+.project-headline {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    color: var(--text);
+    letter-spacing: -0.015em;
+    font-weight: 700;
+}
+
+.project-summary {
+    font-size: 1rem;
+    color: var(--text-sub);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+}
+
+.project-block {
+    margin-bottom: 1.5rem;
+}
+
+.project-block-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.project-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-block li {
+    font-size: 0.95rem;
+    color: var(--text-sub);
+    padding: 0.4rem 0 0.4rem 1.4rem;
+    position: relative;
+    line-height: 1.55;
+}
+
+.project-block li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-card);
+}
+
+.project-stack span {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background-color: var(--bg-skill);
+    color: var(--text-skill);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+/* ============================================
    14. CONTACT
    ============================================ */
 .contact-subtext {
@@ -1057,6 +1278,12 @@ section h2::after {
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
     .service-card,
+    .project-card {
+        padding: 1.5rem 1.25rem;
+        border-radius: 10px;
+    }
+    .project-headline { font-size: 1.2rem; }
+
     .exp-card {
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -1074,13 +1301,24 @@ section h2::after {
     .bg-alt {
         padding: 5rem 1.5rem;
     }
+
+    .wordmark--display { font-size: 3.25rem; }
 }
 
 @media (max-width: 768px) {
     h1 { font-size: 2.25rem; }
     h2 { font-size: 1.4rem; }
 
-    .wordmark--display { font-size: 1.5rem; }
+    .wordmark--display { font-size: 2rem; }
+    .hero h1 { font-size: 1.4rem; }
+
+    .hero-cta-row {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .hero-cta-row .cta-button { justify-content: center; }
 
     section {
         padding: 3rem 1.25rem;
@@ -1149,6 +1387,6 @@ section h2::after {
     }
 
     .hero {
-        padding: 8rem 1.25rem 4rem;
+        padding: 5rem 1.25rem;
     }
 }
