@@ -753,49 +753,42 @@ section h2::after {
 }
 
 .results-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 700px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
 }
 
 .result-item {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
 }
 
-.result-label-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-}
-
-.result-label {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text);
-}
-
 .result-value {
-    font-size: 1.4rem;
+    font-size: 3rem;
     font-weight: 800;
     color: var(--accent);
+    letter-spacing: -0.025em;
+    line-height: 1;
     white-space: nowrap;
+    margin-bottom: 0.25rem;
 }
 
 .result-bar-track {
-    height: 8px;
+    width: 100%;
+    max-width: 140px;
+    height: 3px;
     background: var(--border);
-    border-radius: 4px;
+    border-radius: 2px;
     overflow: hidden;
+    margin-bottom: 0.5rem;
 }
 
 .result-bar {
     height: 100%;
     background: linear-gradient(to right, var(--accent), rgba(var(--accent-rgb), 0.5));
-    border-radius: 4px;
+    border-radius: 2px;
     width: 0;
     transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -804,9 +797,17 @@ section h2::after {
     width: var(--target-pct);
 }
 
+.result-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+}
+
 .result-source {
     font-size: 0.78rem;
     color: var(--text-dim);
+    margin-top: auto;
 }
 
 
@@ -1259,18 +1260,93 @@ section h2::after {
    15. FOOTER
    ============================================ */
 .footer {
-    text-align: center;
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 1.5rem 2rem;
     border-top: 1px solid var(--border-footer);
     font-size: 0.9rem;
     color: var(--text-dim);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Structured two-zone layout (used by index footer).
+   Old single-line footers without .footer-grid still center
+   their content via the base .footer rules + .footer-links. */
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border-footer);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wordmark--footer {
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.footer-tagline {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    margin: 0;
 }
 
 .footer-links {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 0.75rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.55rem;
+}
+
+.footer-links a {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.footer-legal p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+}
+
+/* Optical-center fix for the small footer wordmark — same nudge as the nav */
+.footer .wordmark-mark {
+    transform: translateY(8%);
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .footer-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1.25rem;
+    }
 }
 
 /* ============================================
@@ -1283,6 +1359,13 @@ section h2::after {
         border-radius: 10px;
     }
     .project-headline { font-size: 1.2rem; }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .result-value { font-size: 2.5rem; }
+    .result-bar-track { max-width: 120px; }
 
     .exp-card {
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
