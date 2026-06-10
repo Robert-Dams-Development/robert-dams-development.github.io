@@ -1353,20 +1353,6 @@ section h2::after {
    16. REDUCED MOTION
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    .service-card,
-    .project-card {
-        padding: 1.5rem 1.25rem;
-        border-radius: 10px;
-    }
-    .project-headline { font-size: 1.2rem; }
-
-    .results-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    .result-value { font-size: 2.5rem; }
-    .result-bar-track { max-width: 120px; }
-
     .exp-card {
         transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -1391,6 +1377,20 @@ section h2::after {
 @media (max-width: 768px) {
     h1 { font-size: 2.25rem; }
     h2 { font-size: 1.4rem; }
+
+    .service-card,
+    .project-card {
+        padding: 1.5rem 1.25rem;
+        border-radius: 10px;
+    }
+    .project-headline { font-size: 1.2rem; }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .result-value { font-size: 2.5rem; }
+    .result-bar-track { max-width: 120px; }
 
     .wordmark--display { font-size: 2rem; }
     .hero h1 { font-size: 1.4rem; }
